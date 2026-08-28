@@ -2,11 +2,6 @@ DATA AND ANALYSIS SCRIPTS SUPPORTING A GENOME-WIDE ASSOCIATION STUDY
 OF RESISTANCE TO SCLEROTINIA SCLEROTIORUM IN QUINOA
 ===============================================================================
 
-Version: 1.0.0
-Release date: 2026-08-28
-Zenodo DOI: https://doi.org/10.5281/zenodo.22146648
-
-
 1. ASSOCIATED MANUSCRIPT
 -------------------------------------------------------------------------------
 
