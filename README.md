@@ -11,9 +11,7 @@ Zenodo DOI: https://doi.org/10.5281/zenodo.22146648
 -------------------------------------------------------------------------------
 
 Title:
-Genome-Wide Association Study of Resistance to Sclerotinia sclerotiorum
-in Quinoa Identifies Resistance-Associated Loci and Defense-Related
-Candidate Genes
+Genetic Dissection of Sclerotinia Stem Rot Resistance in Quinoa Reveals Resistance-Associated Loci and Candidate Defense Genes
 
 Authors:
 Swapnil Tale, Severin Einspanier, Remco Stam, and Nazgol Emrani
@@ -22,16 +20,13 @@ Swapnil Tale, Severin Einspanier, Remco Stam, and Nazgol Emrani
 2. DATASET DESCRIPTION
 -------------------------------------------------------------------------------
 
-This record contains phenotypic data, derived genotype data, genome-wide
-association study (GWAS) summary statistics, and analysis scripts supporting
+This record contains phenotypic data and analysis scripts supporting
 a study of resistance to Sclerotinia sclerotiorum in a diversity panel of
 91 quinoa accessions.
 
 The deposited files include data from detached-leaf and whole-plant
 stem-inoculation experiments, lesion-length measurements, area under the
-disease progress curve (AUDPC) values, filtered variant data, PLINK binary
-files used for mixed linear model analysis, GLM and MLM association summary
-statistics, and scripts used for statistical analysis and visualization.
+disease progress curve (AUDPC) values, and scripts used for statistical analysis and visualization.
 
 
 3. SOURCE DATA AND PROVENANCE
@@ -43,9 +38,6 @@ associated with NCBI BioProject PRJNA673789:
 
 https://www.ncbi.nlm.nih.gov/bioproject/PRJNA673789
 
-Source publication:
-Patiranage et al. (2022)
-
 Reference genome:
 The QQ74 v2 reference genome used for read alignment and variant calling is
 available through the CoGe database under genome ID 60716:
@@ -53,18 +45,14 @@ available through the CoGe database under genome ID 60716:
 https://genomevolution.org/coge/GenomeInfo.pl?gid=60716
 
 Reference-genome publication:
-Rey et al. (2023)
+Rey, E., Maughan, P. J., Maumus, F., Lewis, D., Wilson, L., Fuller, J., Schmöckel, S. M., Jellen, E. N., Tester, M., & Jarvis, D. E. (2023). A chromosome-scale assembly of the quinoa genome provides insights into the structure and dynamics of its subgenomes. Communications Biology, 6(1), 1263.
 
 The raw sequencing reads and reference-genome files are not duplicated in
-this Zenodo record. They remain available through their original repositories.
+the Zenodo record. They remain available through their original repositories.
 
 
 4. FILE DESCRIPTIONS
 -------------------------------------------------------------------------------
-
-README.txt
-    Description of the dataset, file contents, provenance, and analysis
-    workflow.
 
 phenotypic_data.xlsx
     Processed phenotypic data used in the statistical analyses.
@@ -85,68 +73,48 @@ haplotype_data.xlsx
     Phenotypic values and genotype classes for SNP genotype-class analyses.
     Missing genotype calls are represented as NA.
 
-quinoa_91_accessions.vcf[.gz or .bgz]
-    Derived variant-call data for the 91 quinoa accessions.
-
-quinoa_91_accessions_filtered.bed
-quinoa_91_accessions_filtered.bim
-quinoa_91_accessions_filtered.fam
-    Filtered PLINK binary genotype dataset used to construct the genomic
-    relationship matrix, calculate principal components, and perform the
-    GCTA mixed linear model association analysis.
-
-glm_gwas_summary.tsv.gz
-    Compressed tab-separated GLM genome-wide association summary statistics.
-
-mlm_gwas_summary.tsv.gz
-    Compressed tab-separated MLM genome-wide association summary statistics.
-
-analysis_scripts_v1.0.0.zip
-    Fixed version of the R, Python, and Bash analysis scripts associated with
-    this dataset. The actively maintained scripts are available through the
-    GitHub repository listed above.
-
-Supplementary_Tables.xlsx
-    Table S1 provides the country of origin and geographic region of the
-    91 quinoa accessions. Table S2 lists genes located within 35 kb upstream
-    and downstream of the SNPs identified using the mixed linear model.
-
-Supplementary_Data_S1.xlsx
-    Detailed statistical results from the preliminary experiment comparing
-    disease responses in six- and nine-week-old plants.
-
-Supplementary_Data_S2.xlsx
-    ANOVA, Kruskal-Wallis, Tukey HSD, and Dunn post hoc test results for
-    lesion length at 7, 12, and 17 days post-inoculation and for AUDPC.
-
 
 5. ANALYSIS SCRIPTS
 -------------------------------------------------------------------------------
 
 01_detached_leaf_assay.R
-    Statistical analysis of the detached-leaf assay.
+    Imports and prepares detached-leaf assay data and performs the associated
+    descriptive and statistical analyses.
 
 02_stem_lesion_age_test.R
-    Analysis of the preliminary experiment comparing six- and
-    nine-week-old plants.
+    Analyses the preliminary stem-lesion experiment comparing disease responses
+    in six- and nine-week-old quinoa plants.
 
 03_stem_lesion_audpc_analysis.R
-    Analysis of lesion-length progression and AUDPC among the 91 accessions.
+    Analyses lesion length at 7, 12, and 17 days post-inoculation and area under
+    the disease progress curve (AUDPC) among the 91 quinoa accessions.
 
-04_snp_genotype_class_analysis.R
-    Analysis of disease-response differences among SNP genotype classes.
+04_variant_calling.sh
+    Performs read processing, alignment, and variant-calling steps used to
+    generate the genotype VCF from the publicly available sequencing data.
+    See the script header for software requirements and input paths.
 
-05_glm_gwas_plots.R
-    Import, processing, and visualization of GLM GWAS results.
+05_glm_gwas_hail.ipynb
+    Jupyter notebook implementing genotype filtering and the general linear
+    model genome-wide association analysis using Hail.
 
 06_mlm_gwas_gcta.sh
-    Construction of the genomic relationship matrix, principal-component
-    analysis, and MLM association analysis using GCTA.
+    Prepares the Hail-exported PLINK data for GCTA, constructs the genomic
+    relationship matrix, calculates principal components, and performs the
+    mixed linear model association analysis using PC1 as a covariate.
 
-[INSERT HAIL SCRIPT NAME].py
-    Filtering of genotype data and export of the PLINK BED, BIM, and FAM
-    files used by GCTA.
+07_glm_gwas_plot.R
+    Imports the GLM association summary statistics and generates the
+    corresponding Manhattan plot.
 
+08_mlm_gwas_plot.R
+    Imports the MLM association summary statistics and generates the
+    corresponding Manhattan plot
+
+09_snp_genotype_class_analysis.R
+    Analyses phenotypic differences among genotype classes of SNPs identified
+    in the genome-wide association analyses and generates the associated
+    genotype-class figures.
 
 6. SOFTWARE
 -------------------------------------------------------------------------------
@@ -166,19 +134,25 @@ and session-information file, where provided.
 7. REPRODUCING THE ANALYSES
 -------------------------------------------------------------------------------
 
-1. Download this Zenodo record.
-2. Download or clone the associated GitHub repository.
-3. Place the downloaded data files in the repository directories described
-   in the GitHub README.
-4. Run the R scripts from the root directory of the repository.
-5. Run the Hail genotype-processing script to reproduce the filtered PLINK
-   files, if required.
-6. Run 06_mlm_gwas_gcta.sh in a Linux environment with GCTA available in PATH.
-7. Consult the individual script headers for input files, outputs, and
-   additional software requirements.
+1. Download the Zenodo record and the associated data files.
+2. Consult README.txt for the required input-file locations.
+3. Run 04_variant_calling.sh to reproduce the genotype VCF from the publicly
+   available sequencing reads, if complete regeneration is required.
+4. Run 05_glm_gwas_hail.ipynb to filter the genotype data and conduct the GLM
+   association analysis.
+5. Run 06_mlm_gwas_gcta.sh to construct the genomic relationship matrix,
+   calculate principal components, and conduct the MLM association analysis.
+6. Run 01_detached_leaf_assay.R, 02_stem_lesion_age_test.R, and
+   03_stem_lesion_audpc_analysis.R for the phenotypic analyses.
+7. Run 07_glm_gwas_plot.R and 08_mlm_gwas_plot.R to reproduce the Manhattan
+   and quantile-quantile plots.
+8. Run 09_snp_genotype_class_analysis.R to reproduce the SNP genotype-class
+   comparisons and figures.
 
-The deposited PLINK files allow the GCTA analysis to be reproduced without
-rerunning the complete upstream genotype-processing workflow.
+The R scripts should be run from the repository root directory. The Bash
+scripts require a Linux environment and the software specified in their
+headers. The Hail analysis requires a Python environment with Hail and
+Jupyter installed.
 
 
 8. MISSING DATA
@@ -202,17 +176,15 @@ remain subject to the terms of their original repositories.
 10. CITATION
 -------------------------------------------------------------------------------
 
-Please cite the specific Zenodo version used:
-
 Tale S, Einspanier S, Stam R, Emrani N (2026). Data and analysis scripts
 supporting a genome-wide association study of resistance to Sclerotinia
-sclerotiorum in quinoa. Zenodo. https://doi.org/[INSERT DOI]
+sclerotiorum in quinoa. Zenodo. https://doi.org/10.5281/zenodo.22146648 
 
 
 11. CONTACT
 -------------------------------------------------------------------------------
 
 Swapnil Tale
-[INSERT AFFILIATION]
-Email: [INSERT EMAIL ADDRESS]
-ORCID: [INSERT ORCID]
+Crop Genetics, University of Rostock, Justus-von-Liebig-Weg 8, D-18059 Rostock, Germany 
+Email: swapnil.tale@uni-rostock.de
+ORCID: https://orcid.org/0009-0007-5960-7084
