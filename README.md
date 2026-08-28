@@ -42,9 +42,6 @@ https://genomevolution.org/coge/GenomeInfo.pl?gid=60716
 Reference-genome publication:
 Rey, E., Maughan, P. J., Maumus, F., Lewis, D., Wilson, L., Fuller, J., Schmöckel, S. M., Jellen, E. N., Tester, M., & Jarvis, D. E. (2023). A chromosome-scale assembly of the quinoa genome provides insights into the structure and dynamics of its subgenomes. Communications Biology, 6(1), 1263.
 
-The raw sequencing reads and reference-genome files are not duplicated in
-the Zenodo record. They remain available through their original repositories.
-
 
 4. FILE DESCRIPTIONS
 -------------------------------------------------------------------------------
@@ -162,7 +159,7 @@ exclude missing observations where required.
 -------------------------------------------------------------------------------
 
 The data are distributed under the Creative Commons Attribution 4.0
-International licence (CC BY 4.0), unless otherwise indicated.
+International licence (CC BY 4.0).
 
 The publicly available source sequencing reads and reference-genome files
 remain subject to the terms of their original repositories.
